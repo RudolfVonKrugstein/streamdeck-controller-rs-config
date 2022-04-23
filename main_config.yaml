@@ -1,0 +1,51 @@
+defaults:
+  background_color: "#000000"
+  label_color: "#FFFFFF"
+  superlabel_color: "#FF0000"
+  sublabel_color:
+    red: 255
+    green: 0
+    blue: 255
+init_script:
+  file: main.py
+default_pages: []
+buttons:
+  - name: aws_iam
+    up_face:
+      color: "#000000"
+      label:
+        text: "IAM"
+        color: "#FF0000"
+      sublabel:
+        text: AWS
+        color: "#FFFF00"
+    down_handler:
+      code: foreground_training_chrome()
+  - name: draw_line
+    up_face:
+      color: "#000000"
+      label:
+        text: "Line"
+        color: "#FF0000"
+    down_handler:
+      code: foreground_training_chrome()
+pages:
+  - name: chrome
+    on_app:
+      conditions:
+      - executable: ".*chrome\\.exe"
+    buttons:
+      - position:
+          row: 1
+          col: 0
+        button: aws_iam
+  - name: ZoomIt
+    on_app:
+      conditions:
+      - executable: ".*ZoomIt.*"
+      remove: true
+    buttons:
+      - position:
+          row: 1
+          col: 0
+        button: draw_line
