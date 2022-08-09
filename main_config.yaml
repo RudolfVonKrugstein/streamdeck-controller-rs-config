@@ -8,28 +8,113 @@ defaults:
     blue: 255
 init_script:
   file: main.py
-default_pages: []
-buttons:
-  - name: aws_iam
-    up_face:
-      color: "#000000"
-      label:
-        text: "IAM"
-        color: "#FF0000"
-      sublabel:
-        text: AWS
-        color: "#FFFF00"
-    down_handler:
-      code: foreground_training_chrome()
-  - name: draw_line
-    up_face:
-      color: "#000000"
-      label:
-        text: "Line"
-        color: "#FF0000"
-    down_handler:
-      code: foreground_training_chrome()
+default_pages:
+  - applications
+buttons: []
 pages:
+  - name: applications
+    buttons:
+      - position:
+          row: 0
+          col: 0
+        button:
+          up_face:
+            file: chrome.png
+            label: Chrome
+          down_handler:
+            code: start_or_focus_chrome()
+      - position:
+          row: 1
+          col: 0
+        button:
+          up_face:
+            file: powerpoint.png
+            label: PowerPoint
+          down_handler:
+            code: focus_power_point()
+      - position:
+          row: 2
+          col: 0
+        button:
+          up_face:
+            file: drawing.png
+            label: Draw
+          down_handler:
+            code: start_drawing()
+      - position:
+          row: 2
+          col: 1
+        button:
+          up_face:
+            file: break.png
+            label: Break
+          down_handler:
+            code: goto_break_page()
+  - name: break_page
+    buttons:
+      - position:
+          row: 1
+          col: 0
+        button:
+          name: break_time_100
+          up_face:
+            label: "0"
+      - position:
+          row: 1
+          col: 1
+        button:
+          name: break_time_10
+          up_face:
+            label: "0"
+      - position:
+          row: 1
+          col: 2
+        button:
+          name: break_time_1
+          up_face:
+            label: "0"
+      - position: (0, 0)
+        button:
+          name: break_time_plus_100
+          up_face:
+            label: "^"
+          down_handler:
+            code: add_to_break_time(100)
+      - position: (0, 2)
+        button:
+          name: break_time_minus_100
+          up_face:
+            label: "v"
+          down_handler:
+            code: add_to_break_time(-100)
+      - position: (1, 0)
+        button:
+          name: break_time_plus_10
+          up_face:
+            label: "^"
+          down_handler:
+            code: add_to_break_time(10)
+      - position: (1, 2)
+        button:
+          name: break_time_minus_10
+          up_face:
+            label: "v"
+          down_handler:
+            code: add_to_break_time(-10)
+      - position: (2, 0)
+        button:
+          name: break_time_plus_1
+          up_face:
+            label: "^"
+          down_handler:
+            code: add_to_break_time(1)
+      - position: (2, 2)
+        button:
+          name: break_time_minus_1
+          up_face:
+            label: "v"
+          down_handler:
+            code: add_to_break_time(-1)
   - name: chrome
     on_app:
       conditions:
